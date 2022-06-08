@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="../build/xlnt-es.js"></script>
+    <title>Test xlnt-es.wasm</title>
+</head>
+<body>
+    <script>
+        function createWorkbook () {
+            var book = new Module.Workbook();
+            var sheet = book.active_sheet();
+
+            sheet.delete();
+            book.delete();
+        }
+
+    </script>
+
+    <button
+        onClick="createWorkbook()"
+    >
+        点击创建 Workbook
+    </button>
+
+</body>
+</html>
