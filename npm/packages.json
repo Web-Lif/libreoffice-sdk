@@ -1,0 +1,24 @@
+{
+    "name": "@weblif/xlnt-es",
+    "version": "0.0.1-canary",
+    "main": "xlnt-es.js",
+    "typings": "xlnt-es.d.ts",
+    "author": {
+        "name": "苯苯本",
+        "email": "854363956@qq.com"
+    },
+    "files": [
+        "xlnt-es.js",
+        "xlnt-es.wasm",
+        "xlnt-es.d.ts"
+    ],
+    "license": "MIT",
+    "homepage": "https://github.com/Web-Lif/xlnt-es.git",
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/Web-Lif/xlnt-es.git",
+        "branch": "canary",
+        "platform": "github"
+    }
+
+}
