@@ -8,6 +8,10 @@ enable_testing()
 add_executable(
     ${PROJECT_NAME}
     src/index.cpp
+    src/worksheet.h
+    src/workbook.h
+    src/cell.h
+    src/utils.h
 )
 
 add_subdirectory(third-party/xlnt/source)

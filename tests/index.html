@@ -9,20 +9,77 @@
 </head>
 <body>
     <script>
-        function createWorkbook () {
-            var book = new Module.Workbook();
-            var sheet = book.active_sheet();
+        function download(fileName) {
+            const fileContent = [FS.readFile(fileName)];
 
-            sheet.delete();
+            const mime = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
+            const file = new Blob(fileContent, { type: mime });
+            const downloadUrl = URL.createObjectURL(file);
+
+            // Download the Blob
+            const anchor = document.createElement('a');
+            anchor.download = fileName;
+            anchor.href = downloadUrl;
+            anchor.dataset.downloadurl = mime + ":" + fileName + ":" + downloadUrl;
+            document.body.appendChild(anchor);
+            anchor.click();
+            document.body.removeChild(anchor);
+        }
+
+        function active_sheet () {
+            const book = new Module.Workbook();
+            book.active_sheet((active_sheet) => {
+                active_sheet.cell(1, 1, (cell) => {
+                    cell.set_value('hello word')
+                })
+            });
+            const data = book.save("aaa.xlsx")
+            download("aaa.xlsx")
+            book.delete();
+        }
+
+        function create_sheet() {
+            const book = new Module.Workbook();
+            book.create_sheet((create_sheet) => {
+                create_sheet.cell(1, 1, (cell) => {
+                    cell.set_value('create_sheet')
+                })
+            })
+            const data = book.save("aaa.xlsx")
+            download("aaa.xlsx")
+            book.delete();
+        }
+
+
+        function create_sheet_by_index_3() {
+            const book = new Module.Workbook();
+            book.create_sheet(1, (create_sheet) => {
+                create_sheet.cell(1, 1, (cell) => {
+                    cell.set_value('create_sheet')
+                })
+            })
+            const data = book.save("aaa.xlsx")
+            download("aaa.xlsx")
             book.delete();
         }
 
     </script>
 
     <button
-        onClick="createWorkbook()"
+        onClick="active_sheet()"
     >
-        点击创建 Workbook
+        active_sheet
+    </button>
+
+    <button
+        onClick="create_sheet()"
+    >
+        create_sheet
+    </button>
+    <button
+        onClick="create_sheet_by_index_3()"
+    >
+        create_sheet_by_index_3
     </button>
 
 </body>
