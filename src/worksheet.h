@@ -6,6 +6,7 @@ using namespace emscripten;
 
 EMSCRIPTEN_BINDINGS(worksheet) {
   class_<xlnt::worksheet>("Worksheet")
+    .function("garbage_collect", &xlnt::worksheet::garbage_collect)
     .function("cell", optional_override([](
         xlnt::worksheet& worksheet,
         uint32_t col,

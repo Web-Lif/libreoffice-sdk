@@ -102,17 +102,8 @@ EMSCRIPTEN_BINDINGS(workbook) {
     // calendar base_date() const;
     // void base_date(calendar base_date);
     .function("has_title", &xlnt::workbook::has_title)
-    .function("title", optional_override([](
-        xlnt::workbook& workbook
-    ){
-        return workbook.title();
-    }))
-    .function("title", optional_override([](
-        xlnt::workbook& workbook,
-        std::string title
-    ){
-        workbook.title(title);
-    }))
+    .function("title", static_cast<std::string(xlnt::workbook::*)() const>(&xlnt::workbook::title))
+    .function("title", static_cast<void(xlnt::workbook::*)(const std::string&)>(&xlnt::workbook::title))
     .function("abs_path", &xlnt::workbook::abs_path)
     .function("arch_id_flags", &xlnt::workbook::arch_id_flags)
     // std::vector<xlnt::named_range> named_ranges() const;
